@@ -16,12 +16,16 @@ class _TXMashState extends State<TXMash> {
   final transactionList = List<Transaction>();
 
   void _addTransaction(String name, num amt) {
+    if (name.length == 0 || amt <= 0) return;
+
     setState(() {
-      transactionList.add(Transaction(
-          expenseAmount: amt,
-          expenseName: name.toString(),
-          id: DateTime.now().toString(),
-          timestamp: DateTime.now()));
+      transactionList.insert(
+          0,
+          Transaction(
+              expenseAmount: amt,
+              expenseName: name.toString(),
+              id: DateTime.now().toString(),
+              timestamp: DateTime.now()));
     });
   }
 

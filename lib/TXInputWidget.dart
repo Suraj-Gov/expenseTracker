@@ -39,6 +39,8 @@ class TXInputWidget extends StatelessWidget {
                       ),
                       width: MediaQuery.of(context).size.width * 0.55,
                       child: TextField(
+                        onSubmitted: (_) => submitFunction(
+                            txNameInput.text, txAmountInput.text),
                         controller: txNameInput,
                         style: TextStyle(
                           color: Colors.white,
@@ -63,12 +65,15 @@ class TXInputWidget extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: TextField(
+                        onSubmitted: (_) => submitFunction(
+                            txNameInput.text, txAmountInput.text),
                         controller: txAmountInput,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                         ),
-                        keyboardType: TextInputType.number,
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
                         cursorColor: Colors.orange,
                         decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
