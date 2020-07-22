@@ -1,16 +1,13 @@
 # expenseTracker
 
-A new Flutter project.
+A new Flutter project to learn design in flutter, business logic and how to implement custom widgets. Dark theme FTW.
 
-## Getting Started
+## Plans
 
-This project is a starting point for a Flutter application.
+- Have widgets that show your expenses along with the amount and the date. (future plan is to add animations so that when I tap on a expense widget, the date slides in view from behind the widget)
 
-A few resources to get you started if this is your first Flutter project:
+- Have a main input widget that shows two textfields and accepts the expense name and amount.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Have a date picker.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Make a custom widget showing the expense summary for a week.
