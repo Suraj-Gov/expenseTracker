@@ -1,3 +1,4 @@
+/// This the widget that builds the transaction data.
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -29,7 +30,7 @@ class _TXWidgetState extends State<TXWidget> {
 
     String getPennies() => _splitAmounts.length > 1 ? _splitAmounts[1] : "00";
 
-    var text = Text(
+    var wholeAmount = Text(
       '\$${getWholeAmount()}',
       style: TextStyle(
         fontSize: 26,
@@ -37,9 +38,10 @@ class _TXWidgetState extends State<TXWidget> {
         color: Colors.white,
       ),
     );
+
     return Container(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+        padding: const EdgeInsets.fromLTRB(10, 20, 10, 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           // card and the date thing below
@@ -62,26 +64,30 @@ class _TXWidgetState extends State<TXWidget> {
                         horizontal: 15,
                         vertical: 10,
                       ),
-                      child: Text(
-                        this.widget.name,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Text(
+                          this.widget.name,
+                          style: TextStyle(
+                            fontSize:
+                                (this.widget.name.length < 25) ? 25 : null,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: text,
+                            child: wholeAmount,
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(1.0),
+                            padding: const EdgeInsets.fromLTRB(2, 0, 0, 4.5),
                             child: Text(
                               getPennies(),
                               style: TextStyle(
@@ -99,27 +105,15 @@ class _TXWidgetState extends State<TXWidget> {
                 ),
               ),
             ),
-            // Positioned(
-            //   right: 0,
-            //   child: Text(
-            //     this.date.toString(),
-            //     textAlign: TextAlign.right,
-            //     style: TextStyle(
-            //       fontSize: 10,
-            //       fontWeight: FontWeight.w300,
-            //       color: Colors.grey,
-            //     ),
-            //   ),
-            // )
             Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 7, 0),
                   child: Text(
                     DateFormat.yMMMMd("en_US").format(this.widget.date),
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w300,
                       color: Colors.grey,
                     ),

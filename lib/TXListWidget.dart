@@ -1,39 +1,29 @@
+/// This is the widget that builds the List of TXWidgets.
+import 'package:expenseTracker/Transaction.dart';
 import "package:flutter/material.dart";
-import "./Transaction.dart";
 import './TXWidget.dart';
 
-class TXListWidget extends StatefulWidget {
-  @override
-  _TXListWidgetState createState() => _TXListWidgetState();
-}
+class TXListWidget extends StatelessWidget {
+  final List<Transaction> transactionList;
 
-class _TXListWidgetState extends State<TXListWidget> {
-  List<Transaction> txList = [
-    Transaction(
-      expenseAmount: 12,
-      expenseName: "Milk",
-      id: "001",
-      timestamp: DateTime.now(),
-    ),
-    Transaction(
-      expenseAmount: 14,
-      expenseName: "Turd",
-      id: "002",
-      timestamp: DateTime.now(),
-    )
-  ];
+  TXListWidget({@required this.transactionList});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: txList
-          .map((i) => TXWidget(
-                amount: i.expenseAmount,
-                date: i.timestamp,
-                id: i.id,
-                name: i.expenseName,
-              ))
-          .toList(),
+    return Container(
+      height: 400,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return TXWidget(
+            amount: transactionList[index].expenseAmount,
+            date: transactionList[index].timestamp,
+            id: transactionList[index].id,
+            name: transactionList[index].expenseName,
+          );
+        },
+        itemCount: transactionList.length,
+        padding: EdgeInsets.all(6),
+      ),
     );
   }
 }

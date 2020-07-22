@@ -1,6 +1,6 @@
+/// This is the main file that gets executed first.
 import "package:flutter/material.dart";
-import "./TXListWidget.dart";
-import "./TXInputWidget.dart";
+import "./TXMash.dart";
 
 void main() => runApp(HomePage());
 
@@ -15,18 +15,8 @@ class HomePage extends StatelessWidget {
           "Expense Tracker",
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(15, 15, 15, 1),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            TXInputWidget((val) => print(val)),
-            TXListWidget()
-          ],
-        ),
-      ),
+      body: SingleChildScrollView(child: TXMash()),
+      backgroundColor: Color.fromRGBO(15, 15, 15, 1),
     ));
   }
 }
