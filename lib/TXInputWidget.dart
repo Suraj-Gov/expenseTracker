@@ -1,18 +1,26 @@
 /// This is the widget that builds the input for transactions.
 import "package:flutter/material.dart";
 
-class TXInputWidget extends StatelessWidget {
-  final txNameInput = TextEditingController();
-  final txAmountInput = TextEditingController();
+class TXInputWidget extends StatefulWidget {
   final Function submitFunction;
 
   TXInputWidget(this.submitFunction);
+
+  @override
+  _TXInputWidgetState createState() => _TXInputWidgetState();
+}
+
+class _TXInputWidgetState extends State<TXInputWidget> {
+  final txNameInput = TextEditingController();
+
+  final txAmountInput = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 30),
       child: Container(
+          height: MediaQuery.of(context).size.height * 0.23,
           decoration: BoxDecoration(
               color: Color.fromRGBO(30, 30, 30, 1),
               boxShadow: [
@@ -27,7 +35,7 @@ class TXInputWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +47,7 @@ class TXInputWidget extends StatelessWidget {
                       ),
                       width: MediaQuery.of(context).size.width * 0.55,
                       child: TextField(
-                        onSubmitted: (_) => submitFunction(
+                        onSubmitted: (_) => widget.submitFunction(
                             txNameInput.text, txAmountInput.text),
                         controller: txNameInput,
                         style: TextStyle(
@@ -65,7 +73,7 @@ class TXInputWidget extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: TextField(
-                        onSubmitted: (_) => submitFunction(
+                        onSubmitted: (_) => widget.submitFunction(
                             txNameInput.text, txAmountInput.text),
                         controller: txAmountInput,
                         style: TextStyle(
@@ -90,14 +98,15 @@ class TXInputWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: RaisedButton(
-                    color: Color.fromRGBO(45, 45, 45, 1),
-                    onPressed: () =>
-                        submitFunction(txNameInput.text, txAmountInput.text),
+                  child: FlatButton(
+                    onPressed: () => widget.submitFunction(
+                        txNameInput.text, txAmountInput.text),
                     child: Text(
                       "Add Expense".toUpperCase(),
                       style: TextStyle(
-                          color: Colors.orange, fontWeight: FontWeight.w500),
+                          fontSize: 16,
+                          color: Colors.orange,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
