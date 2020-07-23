@@ -55,7 +55,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                           fontSize: 20,
                         ),
                         keyboardType: TextInputType.text,
-                        cursorColor: Colors.orange,
+                        cursorColor: Theme.of(context).accentColor,
                         decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
                           hintText: "Expense Name",
@@ -82,7 +82,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                         ),
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
-                        cursorColor: Colors.orange,
+                        cursorColor: Theme.of(context).accentColor,
                         decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
                           hintText: "Amount",
@@ -105,7 +105,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                       "Add Expense".toUpperCase(),
                       style: TextStyle(
                           fontSize: 16,
-                          color: Colors.orange,
+                          color: Theme.of(context).accentColor,
                           fontWeight: FontWeight.w500),
                     ),
                   ),

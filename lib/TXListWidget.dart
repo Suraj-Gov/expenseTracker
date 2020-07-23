@@ -12,17 +12,20 @@ class TXListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.9,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return TXWidget(
-            amount: transactionList[index].expenseAmount,
-            date: transactionList[index].timestamp,
-            id: transactionList[index].id,
-            name: transactionList[index].expenseName,
-          );
-        },
-        itemCount: transactionList.length,
-        padding: EdgeInsets.all(6),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return TXWidget(
+              amount: transactionList[index].expenseAmount,
+              date: transactionList[index].timestamp,
+              id: transactionList[index].id,
+              name: transactionList[index].expenseName,
+            );
+          },
+          itemCount: transactionList.length,
+          padding: EdgeInsets.all(6),
+        ),
       ),
     );
   }

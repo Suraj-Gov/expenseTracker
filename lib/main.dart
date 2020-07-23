@@ -63,32 +63,50 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+            accentColor: Colors.orange,
+            backgroundColor: Colors.red,
+            appBarTheme: AppBarTheme(
+              color: Color.fromRGBO(35, 35, 35, 1),
+              elevation: 10,
+            )),
         home: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(24, 24, 24, 1),
-        title: Text(
-          "Expense Tracker",
-        ),
-      ),
-      body: SingleChildScrollView(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          TXListWidget(
-            transactionList: transactionList,
-          )
-        ],
-      )),
-      floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton(
-          onPressed: () => _showTransactionInputBox(context),
-          child: Icon(Icons.add),
-          backgroundColor: Colors.orange[400],
-          foregroundColor: Colors.black,
-          splashColor: Colors.orange[900],
-        ),
-      ),
-      backgroundColor: Color.fromRGBO(15, 15, 15, 1),
-    ));
+          appBar: AppBar(
+            elevation: Theme.of(context).appBarTheme.elevation,
+            backgroundColor: Theme.of(context).appBarTheme.color,
+            title: Text(
+              "Expense Tracker",
+            ),
+          ),
+          body: SingleChildScrollView(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              TXListWidget(
+                transactionList: transactionList,
+              )
+            ],
+          )),
+          floatingActionButton: Builder(
+            builder: (context) => FloatingActionButton.extended(
+              onPressed: () => _showTransactionInputBox(context),
+              label: Text(
+                "Add transaction".toUpperCase(),
+                strutStyle: StrutStyle(
+                  height: 0,
+                ),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              icon: Icon(Icons.add_circle),
+              backgroundColor: Theme.of(context).accentColor,
+              foregroundColor: Colors.black,
+              splashColor: Colors.orange[900],
+            ),
+          ),
+          backgroundColor: Color.fromRGBO(15, 15, 15, 1),
+        ));
   }
 }

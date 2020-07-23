@@ -41,7 +41,7 @@ class _TXWidgetState extends State<TXWidget> {
 
     return Container(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 20, 10, 5),
+        padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           // card and the date thing below
@@ -108,7 +108,7 @@ class _TXWidgetState extends State<TXWidget> {
             Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 7, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 7, 5),
                   child: Text(
                     DateFormat.yMMMMd("en_US").format(this.widget.date),
                     textAlign: TextAlign.right,
