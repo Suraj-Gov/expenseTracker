@@ -22,14 +22,15 @@ class _HomePageState extends State<HomePage> {
         context: ctx,
         builder: (bCtx) {
           return GestureDetector(
-            child: TXInputWidget((name, amt) => _addTransaction(name, amt)),
+            child: TXInputWidget(
+                (context, name, amt) => _addTransaction(context, name, amt)),
             onTap: () {},
             behavior: HitTestBehavior.opaque,
           );
         });
   }
 
-  void _addTransaction(String name, String amt) {
+  void _addTransaction(BuildContext context, String name, String amt) {
     if (name == "" && amt == "") {
       print("both values are null");
       return;
@@ -53,6 +54,10 @@ class _HomePageState extends State<HomePage> {
               id: DateTime.now().toString(),
               timestamp: DateTime.now()));
     });
+
+    Navigator.of(context).pop();
+    // this just pops the upper most block of widget
+    // i.e the modal input box when user submits input
   }
 
   @override

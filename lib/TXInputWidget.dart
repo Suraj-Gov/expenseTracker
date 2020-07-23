@@ -48,7 +48,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                       width: MediaQuery.of(context).size.width * 0.55,
                       child: TextField(
                         onSubmitted: (_) => widget.submitFunction(
-                            txNameInput.text, txAmountInput.text),
+                            context, txNameInput.text, txAmountInput.text),
                         controller: txNameInput,
                         style: TextStyle(
                           color: Colors.white,
@@ -74,7 +74,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: TextField(
                         onSubmitted: (_) => widget.submitFunction(
-                            txNameInput.text, txAmountInput.text),
+                            context, txNameInput.text, txAmountInput.text),
                         controller: txAmountInput,
                         style: TextStyle(
                           color: Colors.white,
@@ -100,7 +100,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                   padding: const EdgeInsets.only(top: 20),
                   child: FlatButton(
                     onPressed: () => widget.submitFunction(
-                        txNameInput.text, txAmountInput.text),
+                        context, txNameInput.text, txAmountInput.text),
                     child: Text(
                       "Add Expense".toUpperCase(),
                       style: TextStyle(
