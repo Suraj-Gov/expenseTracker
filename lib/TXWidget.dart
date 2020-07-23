@@ -41,7 +41,7 @@ class _TXWidgetState extends State<TXWidget> {
 
     return Container(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           // card and the date thing below
@@ -93,7 +93,7 @@ class _TXWidgetState extends State<TXWidget> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.white,
+                                color: Colors.grey,
                               ),
                             ),
                           ),

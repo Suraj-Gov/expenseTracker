@@ -60,7 +60,9 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                           focusedBorder: InputBorder.none,
                           hintText: "Expense Name",
                           hintStyle: TextStyle(
+                            fontWeight: FontWeight.w300,
                             color: Colors.grey[700],
+                            fontSize: 17,
                           ),
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 8, horizontal: 15),
@@ -87,7 +89,9 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                           focusedBorder: InputBorder.none,
                           hintText: "Amount",
                           hintStyle: TextStyle(
+                            fontWeight: FontWeight.w300,
                             color: Colors.grey[700],
+                            fontSize: 17,
                           ),
                           contentPadding:
                               EdgeInsets.symmetric(vertical: 8, horizontal: 15),

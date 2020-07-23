@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
         theme: ThemeData(
             accentColor: Colors.orange,
             backgroundColor: Colors.red,
+            fontFamily: 'Poppins',
             appBarTheme: AppBarTheme(
               color: Color.fromRGBO(35, 35, 35, 1),
               elevation: 10,
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               icon: Icon(Icons.add_circle),
