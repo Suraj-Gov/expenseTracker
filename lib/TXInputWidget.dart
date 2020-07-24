@@ -23,14 +23,6 @@ class _TXInputWidgetState extends State<TXInputWidget> {
           height: MediaQuery.of(context).size.height * 0.23,
           decoration: BoxDecoration(
               color: Color.fromRGBO(30, 30, 30, 1),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromRGBO(18, 18, 18, 0.3),
-                  blurRadius: 10,
-                  spreadRadius: 4,
-                  offset: Offset(0, 7),
-                )
-              ],
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -47,8 +39,11 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                       ),
                       width: MediaQuery.of(context).size.width * 0.55,
                       child: TextField(
-                        onSubmitted: (_) => widget.submitFunction(
-                            context, txNameInput.text, txAmountInput.text),
+                        maxLength: 50,
+                        onSubmitted: (_) => (txNameInput.text != "")
+                            ? widget.submitFunction(
+                                context, txNameInput.text, txAmountInput.text)
+                            : null,
                         controller: txNameInput,
                         style: TextStyle(
                           color: Colors.white,
@@ -57,7 +52,8 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                         keyboardType: TextInputType.text,
                         cursorColor: Theme.of(context).accentColor,
                         decoration: InputDecoration(
-                          focusedBorder: InputBorder.none,
+                          counterText: "",
+                          border: InputBorder.none,
                           hintText: "Expense Name",
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.w300,
@@ -75,8 +71,12 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: TextField(
-                        onSubmitted: (_) => widget.submitFunction(
-                            context, txNameInput.text, txAmountInput.text),
+                        maxLength: 50,
+                        onSubmitted: (_) => (txAmountInput.text != "" ||
+                                num.parse(txAmountInput.text) <= 0)
+                            ? widget.submitFunction(
+                                context, txNameInput.text, txAmountInput.text)
+                            : null,
                         controller: txAmountInput,
                         style: TextStyle(
                           color: Colors.white,
@@ -86,7 +86,8 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                             TextInputType.numberWithOptions(decimal: true),
                         cursorColor: Theme.of(context).accentColor,
                         decoration: InputDecoration(
-                          focusedBorder: InputBorder.none,
+                          counterText: "",
+                          border: InputBorder.none,
                           hintText: "Amount",
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.w300,
@@ -103,14 +104,18 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: FlatButton(
-                    onPressed: () => widget.submitFunction(
-                        context, txNameInput.text, txAmountInput.text),
+                    textTheme: ButtonTextTheme.accent,
+                    disabledTextColor: Colors.grey[700],
+                    onPressed: (txNameInput.text != "" &&
+                            txAmountInput.text != "" &&
+                            num.parse(txAmountInput.text) > 0)
+                        ? () => widget.submitFunction(
+                            context, txNameInput.text, txAmountInput.text)
+                        : null,
                     child: Text(
                       "Add Expense".toUpperCase(),
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).accentColor,
-                          fontWeight: FontWeight.w500),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),

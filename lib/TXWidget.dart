@@ -65,12 +65,11 @@ class _TXWidgetState extends State<TXWidget> {
                         vertical: 10,
                       ),
                       child: FittedBox(
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.contain,
                         child: Text(
                           this.widget.name,
                           style: TextStyle(
-                            fontSize:
-                                (this.widget.name.length < 25) ? 25 : null,
+                            fontSize: (this.widget.name.length < 25) ? 25 : 12,
                             fontWeight: FontWeight.w400,
                             color: Colors.white,
                           ),

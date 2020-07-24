@@ -31,20 +31,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _addTransaction(BuildContext context, String name, String amt) {
-    if (name == "" && amt == "") {
-      print("both values are null");
-      return;
-    } else if (name == "") {
-      print("name is null");
-      return;
-    } else if (amt == "") {
-      print("amt is null");
-      return;
-    } else if (num.parse(amt) <= 0) {
-      print("amt is less than or equal to 0");
-      return;
-    }
-
     setState(() {
       transactionList.insert(
           0,
