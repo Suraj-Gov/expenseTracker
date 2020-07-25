@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "./TXListWidget.dart";
 import "./TXInputWidget.dart";
 import "./Transaction.dart";
+import "./chart.dart";
 
 void main() => runApp(HomePage());
 
@@ -12,33 +13,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final transactionList = List<Transaction>();
+  final _transactionList = List<Transaction>();
+
+  List<Transaction> get _recentTransactions {
+    return _transactionList
+        .where((i) =>
+            i.timestamp.isAfter(DateTime.now().subtract(Duration(days: 7))))
+        .toList();
+  }
 
   void _showTransactionInputBox(BuildContext ctx) {
     showModalBottomSheet(
         backgroundColor: Color.fromRGBO(15, 15, 15, 1),
         isDismissible: true,
+        isScrollControlled: true,
         barrierColor: Colors.black38,
         context: ctx,
         builder: (bCtx) {
           return GestureDetector(
-            child: TXInputWidget(
-                (context, name, amt) => _addTransaction(context, name, amt)),
-            onTap: () {},
+            child: TXInputWidget((context, name, amt, date) =>
+                _addTransaction(context, name, amt, date)),
+            onTap: () => print("tapped on the input widget space"),
             behavior: HitTestBehavior.opaque,
           );
         });
   }
 
-  void _addTransaction(BuildContext context, String name, String amt) {
+  void _addTransaction(
+      BuildContext context, String name, String amt, DateTime date) {
     setState(() {
-      transactionList.insert(
+      _transactionList.insert(
           0,
           Transaction(
               expenseAmount: num.parse(num.parse(amt).toString()),
               expenseName: name.toString(),
               id: DateTime.now().toString(),
-              timestamp: DateTime.now()));
+              timestamp: date));
     });
 
     Navigator.of(context).pop();
@@ -65,15 +75,23 @@ class _HomePageState extends State<HomePage> {
               "Expense Tracker",
             ),
           ),
-          body: SingleChildScrollView(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              TXListWidget(
-                transactionList: transactionList,
-              )
-            ],
-          )),
+          body: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+              print("dismissed focus");
+            },
+            child: SingleChildScrollView(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Chart(this._recentTransactions),
+                TXListWidget(
+                  transactionList: _transactionList,
+                )
+              ],
+            )),
+          ),
           floatingActionButton: Builder(
             builder: (context) => FloatingActionButton.extended(
               onPressed: () => _showTransactionInputBox(context),
