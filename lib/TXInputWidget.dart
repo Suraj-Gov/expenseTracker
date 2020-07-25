@@ -22,8 +22,17 @@ class _TXInputWidgetState extends State<TXInputWidget> {
       child: Container(
           height: MediaQuery.of(context).size.height * 0.23,
           decoration: BoxDecoration(
-              color: Color.fromRGBO(30, 30, 30, 1),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+            color: Color.fromRGBO(30, 30, 30, 1),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0, 5),
+                blurRadius: 15,
+                spreadRadius: 6,
+              ),
+            ],
+          ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -34,14 +43,16 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                   children: <Widget>[
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderRadius: BorderRadius.circular(15),
                         color: Color.fromRGBO(18, 18, 18, 1),
                       ),
                       width: MediaQuery.of(context).size.width * 0.55,
                       child: TextField(
                         maxLength: 50,
-                        onSubmitted: (_) => (txNameInput.text != "")
-                            ? widget.submitFunction(
+                        onSubmitted: (_) => (txNameInput.text != "" &&
+                                txAmountInput.text != "" &&
+                                num.parse(txAmountInput.text) > 0)
+                            ? () => widget.submitFunction(
                                 context, txNameInput.text, txAmountInput.text)
                             : null,
                         controller: txNameInput,
@@ -72,9 +83,10 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: TextField(
                         maxLength: 50,
-                        onSubmitted: (_) => (txAmountInput.text != "" ||
-                                num.parse(txAmountInput.text) <= 0)
-                            ? widget.submitFunction(
+                        onSubmitted: (_) => (txNameInput.text != "" &&
+                                txAmountInput.text != "" &&
+                                num.parse(txAmountInput.text) > 0)
+                            ? () => widget.submitFunction(
                                 context, txNameInput.text, txAmountInput.text)
                             : null,
                         controller: txAmountInput,

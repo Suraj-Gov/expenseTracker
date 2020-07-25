@@ -49,7 +49,12 @@ class _TXWidgetState extends State<TXWidget> {
             Container(
               //
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(3),
+                ),
                 color: Color.fromRGBO(23, 23, 23, 1),
                 border: Border.all(
                   color: Color.fromRGBO(20, 20, 20, 1),
