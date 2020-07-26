@@ -74,7 +74,7 @@ class _TXWidgetState extends State<TXWidget> {
                         child: Text(
                           this.widget.name,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: this.widget.name.length < 18 ? 20 : 16,
                             fontWeight: FontWeight.w400,
                             color: Colors.white,
                           ),

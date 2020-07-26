@@ -204,17 +204,17 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: FlatButton(
-                    textTheme: ButtonTextTheme.accent,
-                    disabledTextColor: Colors.grey[800],
-                    onPressed: (txNameInput.text.isNotEmpty &&
-                            txAmountInput.text.isNotEmpty &&
-                            num.parse(txAmountInput.text) > 0 &&
-                            dateSelected != null)
-                        ? inputValidation
-                        : null,
+                FlatButton(
+                  textTheme: ButtonTextTheme.accent,
+                  disabledTextColor: Colors.grey[800],
+                  onPressed: (txNameInput.text.isNotEmpty &&
+                          txAmountInput.text.isNotEmpty &&
+                          num.parse(txAmountInput.text) > 0 &&
+                          dateSelected != null)
+                      ? inputValidation
+                      : null,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: Text(
                       "Add Expense".toUpperCase(),
                       style:
