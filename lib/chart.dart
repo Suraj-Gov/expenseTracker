@@ -1,7 +1,7 @@
 import 'package:expenseTracker/Transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import "./Transaction.dart";
+import 'Transaction.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> transactionList;
@@ -37,19 +37,29 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
         width: MediaQuery.of(context).size.width * 0.9,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ...summary.reversed.map((i) => Column(
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        '\$${i["amount"]}',
-                        style: TextStyle(
-                          color: Colors.white,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.11,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            '\$${i["amount"]}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),

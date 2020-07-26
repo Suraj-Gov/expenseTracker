@@ -1,9 +1,10 @@
 /// This is the main file that gets executed first.
 import "package:flutter/material.dart";
+import "dart:ui";
 import "./TXListWidget.dart";
 import "./TXInputWidget.dart";
 import "./Transaction.dart";
-import "./chart.dart";
+import './Chart.dart';
 
 void main() => runApp(HomePage());
 
@@ -58,6 +59,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final homePageAppBar = AppBar(
+      elevation: Theme.of(context).appBarTheme.elevation,
+      backgroundColor: Theme.of(context).appBarTheme.color,
+      title: Text(
+        "Expense Tracker",
+      ),
+    );
+
+    final vh = MediaQueryData.fromWindow(window).size.height -
+        MediaQueryData.fromWindow(window).padding.top -
+        homePageAppBar.preferredSize.height;
+
     return MaterialApp(
         theme: ThemeData(
             accentColor: Colors.orange,
@@ -68,19 +81,16 @@ class _HomePageState extends State<HomePage> {
               elevation: 10,
             )),
         home: Scaffold(
-          appBar: AppBar(
-            elevation: Theme.of(context).appBarTheme.elevation,
-            backgroundColor: Theme.of(context).appBarTheme.color,
-            title: Text(
-              "Expense Tracker",
-            ),
-          ),
+          appBar: homePageAppBar,
           body: Column(
             children: <Widget>[
-              Chart(this._recentTransactions),
+              Container(
+                height: vh * 0.32,
+                child: Chart(this._recentTransactions),
+              ),
               SingleChildScrollView(
                   child: Container(
-                height: 410,
+                height: vh * 0.68,
                 child: TXListWidget(
                   transactionList: _transactionList,
                 ),
