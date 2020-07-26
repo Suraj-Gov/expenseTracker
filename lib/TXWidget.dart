@@ -69,12 +69,12 @@ class _TXWidgetState extends State<TXWidget> {
                         horizontal: 15,
                         vertical: 10,
                       ),
-                      child: FittedBox(
-                        fit: BoxFit.contain,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.45,
                         child: Text(
                           this.widget.name,
                           style: TextStyle(
-                            fontSize: (this.widget.name.length < 25) ? 25 : 12,
+                            fontSize: 20,
                             fontWeight: FontWeight.w400,
                             color: Colors.white,
                           ),
@@ -83,25 +83,33 @@ class _TXWidgetState extends State<TXWidget> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: wholeAmount,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(2, 0, 0, 4.5),
-                            child: Text(
-                              getPennies(),
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.grey,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: wholeAmount,
                               ),
-                            ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(2, 0, 0, 4.5),
+                                child: Text(
+                                  getPennies(),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     )
                   ],

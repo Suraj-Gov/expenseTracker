@@ -16,7 +16,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
   DateTime dateSelected;
   final txAmountInput = TextEditingController();
 
-  void inputValidation() {
+  bool inputValidation() {
     // (txNameInput.text != "" &&
     //     txAmountInput.text != "" &&
     //     num.parse(txAmountInput.text) > 0)
@@ -28,7 +28,9 @@ class _TXInputWidgetState extends State<TXInputWidget> {
         dateSelected != null) {
       widget.submitFunction(
           context, txNameInput.text, txAmountInput.text, dateSelected);
-    }
+      return true;
+    } else
+      return null;
   }
 
   void showDateInput(BuildContext ctx) {
@@ -206,8 +208,13 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                   padding: const EdgeInsets.only(top: 20),
                   child: FlatButton(
                     textTheme: ButtonTextTheme.accent,
-                    disabledTextColor: Colors.grey[700],
-                    onPressed: inputValidation,
+                    disabledTextColor: Colors.grey[800],
+                    onPressed: (txNameInput.text.isNotEmpty &&
+                            txAmountInput.text.isNotEmpty &&
+                            num.parse(txAmountInput.text) > 0 &&
+                            dateSelected != null)
+                        ? inputValidation
+                        : null,
                     child: Text(
                       "Add Expense".toUpperCase(),
                       style:
