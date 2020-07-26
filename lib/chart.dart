@@ -52,6 +52,7 @@ class Chart extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * 0.05,
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
+                          alignment: Alignment.center,
                           child: Text(
                             '\$${i["amount"]}',
                             style: TextStyle(
