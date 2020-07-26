@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         theme: ThemeData(
             accentColor: Colors.orange,
-            backgroundColor: Colors.red,
+            backgroundColor: Color.fromRGBO(15, 15, 15, 1),
             fontFamily: 'Poppins',
             appBarTheme: AppBarTheme(
               color: Color.fromRGBO(35, 35, 35, 1),
@@ -75,22 +75,17 @@ class _HomePageState extends State<HomePage> {
               "Expense Tracker",
             ),
           ),
-          body: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-              print("dismissed focus");
-            },
-            child: SingleChildScrollView(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Chart(this._recentTransactions),
-                TXListWidget(
+          body: Column(
+            children: <Widget>[
+              Chart(this._recentTransactions),
+              SingleChildScrollView(
+                  child: Container(
+                height: 410,
+                child: TXListWidget(
                   transactionList: _transactionList,
-                )
-              ],
-            )),
+                ),
+              )),
+            ],
           ),
           floatingActionButton: Builder(
             builder: (context) => FloatingActionButton.extended(

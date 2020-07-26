@@ -30,9 +30,70 @@ class Chart extends StatelessWidget {
     });
   }
 
+  num get totalSpending {
+    return summary.fold(0.0, (total, i) => total + i["amount"]);
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(summary);
-    return Container();
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ...summary.reversed.map((i) => Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        '\$${i["amount"]}',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.04,
+                          height: MediaQuery.of(context).size.height * 0.12,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Color.fromRGBO(25, 25, 25, 1),
+                              border: Border.all(
+                                color: Color.fromARGB(85, 85, 85, 1),
+                                width: 2,
+                              )),
+                          child: FractionallySizedBox(
+                            alignment: Alignment.bottomCenter,
+                            heightFactor: totalSpending > 0
+                                ? (i["amount"] as num) / totalSpending
+                                : 0.0,
+                            widthFactor: 0.8,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        i["day"],
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ))
+          ],
+        ));
   }
 }
