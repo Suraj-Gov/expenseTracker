@@ -47,6 +47,9 @@ class Chart extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+          // keep this padding at this or else it results in a renderflex error
+          // idk why
+          // the error ribbon is not visible on screen...
           width: mediaQuery.size.width * 0.9,
           child: isChartEmpty
               ? Text(

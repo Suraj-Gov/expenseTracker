@@ -213,8 +213,13 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                   ),
                 ),
                 FlatButton(
-                  textTheme: ButtonTextTheme.accent,
+                  textColor: Colors.black,
                   disabledTextColor: Colors.grey[800],
+                  disabledColor: Colors.black26,
+                  color: Colors.orange[800],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   onPressed: (txNameInput.text.isNotEmpty &&
                           txAmountInput.text.isNotEmpty &&
                           num.parse(txAmountInput.text) > 0 &&
