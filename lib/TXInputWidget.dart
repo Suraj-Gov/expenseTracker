@@ -51,16 +51,17 @@ class _TXInputWidgetState extends State<TXInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final _isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+
+    final _isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 30),
       child: Container(
           height: ((_isLandscape)
-                  ? MediaQuery.of(context).size.height * 0.65
-                  : MediaQuery.of(context).size.height * 0.4) +
-              MediaQuery.of(context).viewInsets.bottom,
+                  ? mediaQuery.size.height * 0.65
+                  : mediaQuery.size.height * 0.4) +
+              mediaQuery.viewInsets.bottom,
           decoration: BoxDecoration(
             color: Color.fromRGBO(30, 30, 30, 1),
             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -86,7 +87,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                         borderRadius: BorderRadius.circular(15),
                         color: Color.fromRGBO(18, 18, 18, 1),
                       ),
-                      width: MediaQuery.of(context).size.width * 0.55,
+                      width: mediaQuery.size.width * 0.55,
                       child: TextField(
                         maxLength: 50,
                         onSubmitted: (_) => inputValidation,
@@ -115,7 +116,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                       decoration: BoxDecoration(
                           color: Color.fromRGBO(18, 18, 18, 1),
                           borderRadius: BorderRadius.all(Radius.circular(15))),
-                      width: MediaQuery.of(context).size.width * 0.25,
+                      width: mediaQuery.size.width * 0.25,
                       child: TextField(
                         maxLength: 8,
                         onSubmitted: (_) => inputValidation,

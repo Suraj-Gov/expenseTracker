@@ -35,13 +35,14 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+
+    final _isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: mediaQuery.size.width * 0.9,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +51,7 @@ class Chart extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
+                        padding: const EdgeInsets.only(bottom: .0),
                         child: SizedBox(
                           width: constraints.maxWidth * 0.11,
                           height: constraints.maxHeight * 0.11,

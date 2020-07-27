@@ -23,6 +23,8 @@ class _TXWidgetState extends State<TXWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     String getWholeAmount() {
       _splitAmounts = this.widget.amount.toString().split(".");
       return _splitAmounts.first;
@@ -70,7 +72,7 @@ class _TXWidgetState extends State<TXWidget> {
                         vertical: 10,
                       ),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.45,
+                        width: mediaQuery.size.width * 0.45,
                         child: Text(
                           this.widget.name,
                           style: TextStyle(
@@ -84,7 +86,7 @@ class _TXWidgetState extends State<TXWidget> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.3,
+                        width: mediaQuery.size.width * 0.3,
                         child: FittedBox(
                           fit: BoxFit.fitWidth,
                           child: Row(

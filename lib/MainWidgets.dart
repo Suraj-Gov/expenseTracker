@@ -83,6 +83,8 @@ class _MainWidgetsState extends State<MainWidgets> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     final mainWidgetsAppBar = AppBar(
       elevation: Theme.of(context).appBarTheme.elevation,
       backgroundColor: Theme.of(context).appBarTheme.color,
@@ -90,7 +92,7 @@ class _MainWidgetsState extends State<MainWidgets> {
         "Expense Tracker",
       ),
       actions: <Widget>[
-        if (MediaQuery.of(context).orientation == Orientation.landscape)
+        if (mediaQuery.orientation == Orientation.landscape)
           IconButton(
             padding: EdgeInsets.only(right: 20),
             icon: Icon(Icons.show_chart),
@@ -101,12 +103,11 @@ class _MainWidgetsState extends State<MainWidgets> {
       ],
     );
 
-    final vh = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).padding.top -
+    final vh = mediaQuery.size.height -
+        mediaQuery.padding.top -
         mainWidgetsAppBar.preferredSize.height;
 
-    final _isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final _isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     return Scaffold(
       appBar: mainWidgetsAppBar,
