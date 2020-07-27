@@ -37,87 +37,105 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
 
+    final isChartEmpty =
+        summary.fold(0.0, (total, i) => total + i["amount"]) == 0
+            ? true
+            : false;
+
     final _isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
-          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
           width: mediaQuery.size.width * 0.9,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              ...summary.reversed.map((i) => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 9.0),
-                        child: SizedBox(
-                          width: constraints.maxWidth * 0.11,
-                          height: constraints.maxHeight * 0.11,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            alignment: Alignment.center,
-                            child: Text(
-                              '\$${i["amount"]}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: _isLandscape ? 25 : 18,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                            width: constraints.maxWidth * 0.06,
-                            height: constraints.maxHeight * 0.5,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Color.fromRGBO(25, 25, 25, 1),
-                                border: Border.all(
-                                  color: Color.fromARGB(85, 85, 85, 1),
-                                  width: 2,
-                                )),
-                            child: FractionallySizedBox(
-                              alignment: Alignment.bottomCenter,
-                              heightFactor: totalSpending > 0
-                                  ? (i["amount"] as num) / totalSpending
-                                  : 0.0,
-                              widthFactor: 0.8,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Theme.of(context).accentColor,
+          child: isChartEmpty
+              ? Text(
+                  "No recent transactions found.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[800],
+                  ),
+                )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    ...summary.reversed.map((i) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 9.0),
+                              child: SizedBox(
+                                width: constraints.maxWidth * 0.11,
+                                height: constraints.maxHeight * 0.11,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '\$${i["amount"]}',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: _isLandscape ? 25 : 18,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: SizedBox(
-                          height: constraints.maxHeight * 0.1,
-                          width: constraints.maxWidth * 0.1,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              i["day"],
-                              style: TextStyle(
-                                fontSize: _isLandscape ? 21 : 14,
-                                color: Colors.white,
+                            Stack(
+                              children: <Widget>[
+                                Container(
+                                  width: constraints.maxWidth * 0.06,
+                                  height: constraints.maxHeight * 0.5,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Color.fromRGBO(25, 25, 25, 1),
+                                      border: Border.all(
+                                        color: Color.fromARGB(85, 85, 85, 1),
+                                        width: 2,
+                                      )),
+                                  child: FractionallySizedBox(
+                                    alignment: Alignment.bottomCenter,
+                                    heightFactor: totalSpending > 0
+                                        ? (i["amount"] as num) /
+                                            totalSpending *
+                                            0.97
+                                        : 0.0,
+                                    widthFactor: 0.8,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: SizedBox(
+                                height: constraints.maxHeight * 0.1,
+                                width: constraints.maxWidth * 0.1,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    i["day"],
+                                    style: TextStyle(
+                                      fontSize: _isLandscape ? 21 : 14,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ))
-            ],
-          ));
+                          ],
+                        ))
+                  ],
+                ));
     });
   }
 }

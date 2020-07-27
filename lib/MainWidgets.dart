@@ -32,15 +32,6 @@ class _MainWidgetsState extends State<MainWidgets> {
             child: TXInputWidget((context, name, amt, date) =>
                 _addTransaction(context, name, amt, date)),
             onTap: () {
-              // FocusScopeNode currentFocus = FocusScope.of(context);
-              // print(currentFocus);
-              // print(!currentFocus.hasPrimaryFocus &&
-              //     currentFocus.focusedChild != null);
-
-              // if (!currentFocus.hasPrimaryFocus &&
-              //     currentFocus.focusedChild != null) {
-              //   currentFocus.unfocus();
-              // }
               // to exit from keyboard, tap anywhere on the input widget
               // this will unfocus the keyboard :)
               WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
@@ -103,38 +94,49 @@ class _MainWidgetsState extends State<MainWidgets> {
       ],
     );
 
-    final vh = mediaQuery.size.height -
-        mediaQuery.padding.top -
-        mainWidgetsAppBar.preferredSize.height;
-
     final _isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     return Scaffold(
       appBar: mainWidgetsAppBar,
-      body: Column(
-        children: <Widget>[
-          if (!_isLandscape)
-            Container(
-              height: vh * 0.35,
-              child: Chart(this._recentTransactions),
-            ),
-          SingleChildScrollView(
-              child: Container(
-            height: (!_isLandscape) ? vh * 0.65 : vh * 1,
-            child: TXListWidget(
-              transactionList: _transactionList,
-            ),
-          )),
-        ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return _transactionList.isEmpty
+              ? Container(
+                  padding: EdgeInsets.only(top: 30),
+                  width: double.infinity,
+                  child: Text(
+                    "No transactions added.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                )
+              : Column(
+                  children: <Widget>[
+                    if (!_isLandscape)
+                      Expanded(
+                        child: Chart(this._recentTransactions),
+                      ),
+                    SingleChildScrollView(
+                        child: Container(
+                      height: (!_isLandscape)
+                          ? constraints.maxHeight * 0.65
+                          : constraints.maxHeight * 1,
+                      child: TXListWidget(
+                        transactionList: _transactionList,
+                      ),
+                    )),
+                  ],
+                );
+        },
       ),
       floatingActionButton: Builder(
         builder: (context) => FloatingActionButton.extended(
           onPressed: () => _showTransactionInputBox(context),
           label: Text(
             "Add transaction".toUpperCase(),
-            strutStyle: StrutStyle(
-              height: 0,
-            ),
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,

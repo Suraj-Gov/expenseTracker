@@ -60,7 +60,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
       child: Container(
           height: ((_isLandscape)
                   ? mediaQuery.size.height * 0.65
-                  : mediaQuery.size.height * 0.4) +
+                  : mediaQuery.size.height * 0.38) +
               mediaQuery.viewInsets.bottom,
           decoration: BoxDecoration(
             color: Color.fromRGBO(30, 30, 30, 1),
@@ -163,7 +163,8 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
+                                  padding: const EdgeInsets.only(
+                                      right: 8.0, left: 4),
                                   child: Icon(
                                     Icons.calendar_today,
                                     color: Colors.grey,
@@ -188,7 +189,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
+                          padding: const EdgeInsets.only(right: 14.0),
                           child: RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
