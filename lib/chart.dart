@@ -51,7 +51,7 @@ class Chart extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(bottom: .0),
+                        padding: const EdgeInsets.only(bottom: 9.0),
                         child: SizedBox(
                           width: constraints.maxWidth * 0.11,
                           height: constraints.maxHeight * 0.11,
