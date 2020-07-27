@@ -31,8 +31,35 @@ class _MainWidgetsState extends State<MainWidgets> {
           return GestureDetector(
             child: TXInputWidget((context, name, amt, date) =>
                 _addTransaction(context, name, amt, date)),
-            onTap: () => print("tapped on the input widget space"),
+            onTap: () {
+              // FocusScopeNode currentFocus = FocusScope.of(context);
+              // print(currentFocus);
+              // print(!currentFocus.hasPrimaryFocus &&
+              //     currentFocus.focusedChild != null);
+
+              // if (!currentFocus.hasPrimaryFocus &&
+              //     currentFocus.focusedChild != null) {
+              //   currentFocus.unfocus();
+              // }
+              // to exit from keyboard, tap anywhere on the input widget
+              // this will unfocus the keyboard :)
+              WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+            },
             behavior: HitTestBehavior.opaque,
+          );
+        });
+  }
+
+  void _showChartWidget(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        backgroundColor: Color.fromRGBO(18, 18, 18, 0.98),
+        isDismissible: true,
+        isScrollControlled: true,
+        barrierColor: Colors.black38,
+        builder: (bCtx) {
+          return Container(
+            child: Chart(this._recentTransactions),
           );
         });
   }
@@ -62,23 +89,37 @@ class _MainWidgetsState extends State<MainWidgets> {
       title: Text(
         "Expense Tracker",
       ),
+      actions: <Widget>[
+        if (MediaQuery.of(context).orientation == Orientation.landscape)
+          IconButton(
+            padding: EdgeInsets.only(right: 20),
+            icon: Icon(Icons.show_chart),
+            onPressed: () => _showChartWidget(context),
+            alignment: Alignment.centerRight,
+            color: Theme.of(context).accentColor,
+          )
+      ],
     );
 
-    final vh = MediaQueryData.fromWindow(window).size.height -
-        MediaQueryData.fromWindow(window).padding.top -
+    final vh = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
         mainWidgetsAppBar.preferredSize.height;
+
+    final _isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
       appBar: mainWidgetsAppBar,
       body: Column(
         children: <Widget>[
-          Container(
-            height: vh * 0.35,
-            child: Chart(this._recentTransactions),
-          ),
+          if (!_isLandscape)
+            Container(
+              height: vh * 0.35,
+              child: Chart(this._recentTransactions),
+            ),
           SingleChildScrollView(
               child: Container(
-            height: vh * 0.65,
+            height: (!_isLandscape) ? vh * 0.65 : vh * 1,
             child: TXListWidget(
               transactionList: _transactionList,
             ),

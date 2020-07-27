@@ -1,7 +1,6 @@
-import 'package:expenseTracker/Transaction.dart';
+import './Transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'Transaction.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> transactionList;
@@ -36,75 +35,88 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ...summary.reversed.map((i) => Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.11,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          alignment: Alignment.center,
-                          child: Text(
-                            '\$${i["amount"]}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+    final _isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+    return LayoutBuilder(builder: (context, constraints) {
+      return Container(
+          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              ...summary.reversed.map((i) => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: SizedBox(
+                          width: constraints.maxWidth * 0.11,
+                          height: constraints.maxHeight * 0.11,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.center,
+                            child: Text(
+                              '\$${i["amount"]}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: _isLandscape ? 25 : 18,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
-                    ),
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.04,
-                          height: MediaQuery.of(context).size.height * 0.12,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Color.fromRGBO(25, 25, 25, 1),
-                              border: Border.all(
-                                color: Color.fromARGB(85, 85, 85, 1),
-                                width: 2,
-                              )),
-                          child: FractionallySizedBox(
-                            alignment: Alignment.bottomCenter,
-                            heightFactor: totalSpending > 0
-                                ? (i["amount"] as num) / totalSpending
-                                : 0.0,
-                            widthFactor: 0.8,
-                            child: Container(
-                              decoration: BoxDecoration(
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            width: constraints.maxWidth * 0.06,
+                            height: constraints.maxHeight * 0.5,
+                            decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: Theme.of(context).accentColor,
+                                color: Color.fromRGBO(25, 25, 25, 1),
+                                border: Border.all(
+                                  color: Color.fromARGB(85, 85, 85, 1),
+                                  width: 2,
+                                )),
+                            child: FractionallySizedBox(
+                              alignment: Alignment.bottomCenter,
+                              heightFactor: totalSpending > 0
+                                  ? (i["amount"] as num) / totalSpending
+                                  : 0.0,
+                              widthFactor: 0.8,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Theme.of(context).accentColor,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: SizedBox(
+                          height: constraints.maxHeight * 0.1,
+                          width: constraints.maxWidth * 0.1,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              i["day"],
+                              style: TextStyle(
+                                fontSize: _isLandscape ? 21 : 14,
+                                color: Colors.white,
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        i["day"],
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.white,
                         ),
                       ),
-                    ),
-                  ],
-                ))
-          ],
-        ));
+                    ],
+                  ))
+            ],
+          ));
+    });
   }
 }
