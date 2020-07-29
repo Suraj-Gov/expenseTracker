@@ -39,18 +39,19 @@ class _TXInputWidgetState extends State<TXInputWidget> {
   void showDateInput(BuildContext ctx) {
     if (Platform.isIOS) {
       showModalBottomSheet(
+          backgroundColor:
+              MediaQuery.of(context).platformBrightness == Brightness.dark
+                  ? Theme.of(context).backgroundColor
+                  : Colors.white,
           context: ctx,
           builder: (bCtx) {
             return CupertinoTheme(
               data: CupertinoThemeData(
-                primaryColor: Colors.white,
-                textTheme: CupertinoTextThemeData(
-                    textStyle: TextStyle(
-                  color: Colors.white,
-                )),
-              ),
+                  primaryColor: Theme.of(bCtx).backgroundColor,
+                  textTheme: CupertinoTextThemeData(
+                    primaryColor: Colors.black,
+                  )),
               child: CupertinoDatePicker(
-                backgroundColor: Theme.of(context).backgroundColor,
                 onDateTimeChanged: (value) {
                   setState(() {
                     dateSelected = value;
@@ -72,15 +73,6 @@ class _TXInputWidgetState extends State<TXInputWidget> {
       initialDate: DateTime.now(),
       firstDate: DateTime.now().subtract(Duration(days: 365)),
       lastDate: DateTime.now(),
-      builder: (BuildContext context, Widget child) {
-        return Theme(
-          data: ThemeData(
-            backgroundColor: Colors.red,
-            accentColor: Colors.red,
-          ),
-          child: child,
-        );
-      },
     ).then((date) {
       if (date == null)
         return;
