@@ -87,7 +87,8 @@ class _TXWidgetState extends State<TXWidget> {
                             margin: const EdgeInsets.only(right: 8),
                             width: mediaQuery.size.width * 0.25,
                             child: FittedBox(
-                              fit: BoxFit.contain,
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerRight,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.end,
