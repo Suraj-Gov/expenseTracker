@@ -22,7 +22,7 @@ class _MainWidgetsState extends State<MainWidgets> {
 
   void _showTransactionInputBox(BuildContext ctx) {
     showModalBottomSheet(
-        backgroundColor: Color.fromRGBO(15, 15, 15, 1),
+        backgroundColor: Colors.transparent,
         isDismissible: true,
         isScrollControlled: true,
         barrierColor: Colors.black38,
@@ -139,16 +139,16 @@ class _MainWidgetsState extends State<MainWidgets> {
             "Add transaction".toUpperCase(),
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          icon: Icon(Icons.add_circle),
+          icon: Icon(Icons.account_balance_wallet),
           backgroundColor: Theme.of(context).accentColor,
           foregroundColor: Colors.black,
           splashColor: Colors.orange[900],
         ),
       ),
-      backgroundColor: Color.fromRGBO(15, 15, 15, 1),
+      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }

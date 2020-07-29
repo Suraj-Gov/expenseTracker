@@ -50,7 +50,7 @@ class _TXInputWidgetState extends State<TXInputWidget> {
                 )),
               ),
               child: CupertinoDatePicker(
-                backgroundColor: Color.fromRGBO(15, 15, 15, 1),
+                backgroundColor: Theme.of(context).backgroundColor,
                 onDateTimeChanged: (value) {
                   setState(() {
                     dateSelected = value;
@@ -68,11 +68,20 @@ class _TXInputWidgetState extends State<TXInputWidget> {
     }
 
     showDatePicker(
-            context: ctx,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2000),
-            lastDate: DateTime.now())
-        .then((date) {
+      context: ctx,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now().subtract(Duration(days: 365)),
+      lastDate: DateTime.now(),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+            backgroundColor: Colors.red,
+            accentColor: Colors.red,
+          ),
+          child: child,
+        );
+      },
+    ).then((date) {
       if (date == null)
         return;
       else

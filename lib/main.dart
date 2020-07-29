@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
           accentColor: Colors.orange,
-          backgroundColor: Color(0xFFFFFFFF),
+          backgroundColor: Color.fromRGBO(15, 15, 15, 1),
           fontFamily: 'Poppins',
           appBarTheme: AppBarTheme(
             color: Color.fromRGBO(35, 35, 35, 1),
