@@ -1,5 +1,8 @@
 /// This is the widget that builds the input for transactions.
+import "dart:io";
+
 import "package:flutter/material.dart";
+import "package:flutter/cupertino.dart";
 import 'package:intl/intl.dart';
 
 class TXInputWidget extends StatefulWidget {
@@ -34,6 +37,36 @@ class _TXInputWidgetState extends State<TXInputWidget> {
   }
 
   void showDateInput(BuildContext ctx) {
+    if (Platform.isIOS) {
+      showModalBottomSheet(
+          context: ctx,
+          builder: (bCtx) {
+            return CupertinoTheme(
+              data: CupertinoThemeData(
+                primaryColor: Colors.white,
+                textTheme: CupertinoTextThemeData(
+                    textStyle: TextStyle(
+                  color: Colors.white,
+                )),
+              ),
+              child: CupertinoDatePicker(
+                backgroundColor: Color.fromRGBO(15, 15, 15, 1),
+                onDateTimeChanged: (value) {
+                  setState(() {
+                    dateSelected = value;
+                  });
+                },
+                mode: CupertinoDatePickerMode.date,
+                initialDateTime: DateTime.now(),
+                maximumDate: DateTime.now(),
+                minimumDate: DateTime.now().subtract(Duration(days: 365)),
+              ),
+            );
+          });
+
+      return;
+    }
+
     showDatePicker(
             context: ctx,
             initialDate: DateTime.now(),
