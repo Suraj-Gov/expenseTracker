@@ -41,103 +41,101 @@ class _TXWidgetState extends State<TXWidget> {
       ),
     );
 
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          // card and the date thing below
-          children: <Widget>[
-            Container(
-              //
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(3),
-                ),
-                color: Color.fromRGBO(23, 23, 23, 1),
-                border: Border.all(
-                  color: Color.fromRGBO(20, 20, 20, 1),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 10,
+    return LayoutBuilder(
+        builder: (context, constraints) => Container(
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 35),
+              child: Stack(
+                // card and the date thing below
+                children: <Widget>[
+                  Container(
+                    height: mediaQuery.size.height * 0.11,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                        bottomLeft: Radius.circular(25),
+                        bottomRight: Radius.circular(3),
                       ),
-                      child: SizedBox(
-                        width: mediaQuery.size.width * 0.45,
-                        child: Text(
-                          this.widget.name,
-                          style: TextStyle(
-                            fontSize: this.widget.name.length < 18 ? 23 : 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
-                        ),
+                      color: Color.fromRGBO(23, 23, 23, 1),
+                      border: Border.all(
+                        color: Color.fromRGBO(20, 20, 20, 1),
                       ),
                     ),
-                    Padding(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: mediaQuery.size.width * 0.3,
-                        child: FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: wholeAmount,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(2, 0, 0, 4.5),
-                                child: Text(
-                                  getPennies(),
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey,
-                                  ),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 10,
+                            ),
+                            child: SizedBox(
+                              width: mediaQuery.size.width * 0.45,
+                              child: Text(
+                                this.widget.name,
+                                style: TextStyle(
+                                  fontSize:
+                                      this.widget.name.length < 18 ? 23 : 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 8),
+                            width: mediaQuery.size.width * 0.25,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: wholeAmount,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(2, 0, 0, 4.5),
+                                    child: Text(
+                                      getPennies(),
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       ),
-                    )
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                ),
-              ),
-            ),
-            Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 7, 5),
-                  child: Text(
-                    DateFormat.yMMMMd("en_US").format(this.widget.date),
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.grey,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+                  Positioned(
+                    bottom: -32,
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(0, 5, 7, 5),
+                      child: Text(
+                        DateFormat.yMMMMd("en_US").format(this.widget.date),
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                alignment: Alignment.bottomRight,
+                overflow: Overflow.visible,
+              ),
+            ));
   }
 }

@@ -11,20 +11,18 @@ class TXListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return TXWidget(
-              amount: transactionList[index].expenseAmount,
-              date: transactionList[index].timestamp,
-              id: transactionList[index].id,
-              name: transactionList[index].expenseName,
-            );
-          },
-          itemCount: transactionList.length,
-          padding: EdgeInsets.all(6),
-        ),
+      padding: EdgeInsets.symmetric(horizontal: 8),
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return TXWidget(
+            amount: transactionList[index].expenseAmount,
+            date: transactionList[index].timestamp,
+            id: transactionList[index].id,
+            name: transactionList[index].expenseName,
+          );
+        },
+        itemCount: transactionList.length,
+        padding: EdgeInsets.all(6),
       ),
     );
   }
